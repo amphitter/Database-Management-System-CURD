@@ -1,201 +1,213 @@
-# 📘 Database Management System – CURD (Coaching Institute)
+# 🏫 Coaching Institute Database Management System (CRUD)
 
-**Hands-on CRUD web application for managing coaching classes**
-Built with **Node.js + Express** (backend) and **React** (frontend).
-
----
-
-## 🚀 Table of Contents
-
-1. [Features](#features)
-2. [Prerequisites](#prerequisites)
-3. [Setup Guide](#setup-guide)
-
-   1. [Clone the repo](#clone-the-repo)
-   2. [Backend setup](#backend-setup)
-   3. [Frontend setup](#frontend-setup)
-4. [Database Configuration](#database-configuration)
-5. [Usage](#usage)
-
-   * CRUD operations
-   * Sample data
-6. [Project Structure](#project-structure)
-7. [Technologies Used](#technologies-used)
-8. [Future Enhancements](#future-enhancements)
-9. [Contact](#contact)
+A modern full-stack web application to manage student records, fee tracking, and academic workflows for a coaching institute. Built using **Next.js 14** (App Router), **Express.js**, and **MongoDB**, this system features admin authentication, analytics, and flexible course management.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-* **CRUD functionality** for:
-
-  * Students
-  * Courses
-  * Teachers
-  * Enrollments
-* RESTful API (Node.js + Express)
-* React front-end for UI interaction
-* Structured for coaching institute needs (student/course enrollments, teacher assignments)
+- 🔐 **Admin authentication** (JWT-based, hashed passwords)
+- 📚 **Full CRUD** for Students, Teachers, Courses
+- 💰 **Fee tracking system** (Paid vs Pending)
+- 📊 **Interactive dashboard** with live statistics and charts
+- 📁 **Data filtering** by course, fee status, date
+- 📥 **CSV export** for filtered student records
+- 🔄 **Auto-refresh** dashboard every 30 seconds
 
 ---
 
-## ✅ Prerequisites
+## 📂 Project Structure
 
-* **Node.js** (v14+)
-* **npm** (v6+) or **yarn**
-* **MongoDB** (or your preferred database running locally or via cloud)
-* Optional: **Postman** for API testing
+```
+
+Database-Management-System-CURD/
+├── backend/              # Express.js REST API
+│   ├── controllers/      # Route logic
+│   ├── models/           # Mongoose schemas
+│   ├── routes/           # API endpoints
+│   ├── createAdmin.js    # CLI script to create an admin
+│   ├── server.js         # Backend entry point
+│   └── .env              # Your environment configuration
+├── frontend/             # Next.js 14 (App Router)
+│   ├── components/       # Reusable UI components
+│   ├── app/              # App Router pages and layouts
+│   ├── utils/            # Axios services, helpers
+│   └── public/           # Static assets
+└── README.md             # This file
+
+````
 
 ---
 
-## 🛠️ Setup Guide
+## 🧰 Tech Stack
 
-### Clone the repo
+| Layer     | Technology                       |
+|-----------|----------------------------------|
+| Frontend  | Next.js 14, Tailwind CSS, Axios  |
+| Backend   | Node.js, Express.js, JWT, bcrypt |
+| Database  | MongoDB + Mongoose               |
+| Charts    | Chart.js (`react-chartjs-2`)     |
+
+---
+
+## ⚙️ Getting Started
+
+### 🔁 1. Clone the Repository
 
 ```bash
 git clone https://github.com/amphitter/Database-Management-System-CURD.git
 cd Database-Management-System-CURD
+````
+
+---
+
+### 🖥️ 2. Backend Setup
+
+```bash
+cd backend
+npm install
 ```
 
----
+#### 🛡️ Configure Environment Variables
 
-### Backend setup
+Create a `.env` file in `/backend` with the following keys:
 
-1. Navigate to backend directory:
-
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-3. Configure environment:
-
-   * Create a `.env` file:
-
-     ```dotenv
-     MONGODB_URI=<your_mongo_db_connection_string>
-     PORT=5000
-     ```
-4. Launch the backend:
-
-   ```bash
-   npm run dev
-   ```
-
----
-
-### Frontend setup
-
-1. Move to the frontend folder:
-
-   ```bash
-   cd ../frontend
-   ```
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-3. Start the React app:
-
-   ```bash
-   npm start
-   ```
-4. Visit `http://localhost:3000`. The app connects to backend on port `5000`.
-
----
-
-## 🗄️ Database Configuration
-
-* Uses **MongoDB**
-* Collections:
-
-  * `students`
-  * `courses`
-  * `teachers`
-  * `enrollments`
-* Example schema:
-
-  ```js
-  {
-    name: String,
-    email: String,
-    enrolledCourseIds: [ObjectId],
-    teacherId: ObjectId
-  }
-  ```
-* Modify schemas in `backend/models/` as per your structure.
-
----
-
-## 🎯 Usage
-
-* **Add** new students, courses, teachers, and enrollments via UI forms.
-* **View** lists of all entities with clear relational data.
-* **Edit** and **Delete** records inline.
-* **Sample data**: Use Postman or create scripts in `backend/db/`.
-
----
-
-## 🗂️ Project Structure
-
-```text
-/
-├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── server.js
-│   └── .env.example
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── services/
-│   │   └── App.js
-│   └── package.json
-├── .gitignore
-├── README.md
-└── LICENSE
+```env
+PORT=5000
+MONGO_URI=your_mongo_connection_string
+JWT_SECRET=your_jwt_secret_key
+ENCRYPTION_PASSWORD=admin_password_to_hash
 ```
 
----
+> Replace values with your own secure credentials.
 
-## 🧰 Technologies Used
+#### 👤 Create Admin User
 
-* **Backend**: Node.js, Express, Mongoose, dotenv
-* **Frontend**: React, Axios, React Router
-* **Database**: MongoDB
+Generate a default admin (username: `admin`, password: from `ENCRYPTION_PASSWORD`) with:
 
----
+```bash
+node createAdmin.js
+```
 
-## 🚧 Future Enhancements
+> You can customize the script to change the username/password.
 
-* Add **authentication/authorization** for admin and teachers
-* Implement **role-based access control**
-* Add **reporting dashboard** (attendance, progress tracking)
-* Switch to SQL-based databases (PostgreSQL/MySQL)
-* Enhance UI with **Material UI** or **Bootstrap**
+#### ▶️ Run the Backend
 
----
+```bash
+npm run dev
+```
 
-## 🙋 Contact
-
-Created by `@amphitter`.
-For questions or collaboration, reach out via GitHub.
+API will be running on: [http://localhost:5000](http://localhost:5000)
 
 ---
 
-### ✅ Getting Started Checklist
+### 💻 3. Frontend Setup
 
-* [ ] Clone project
-* [ ] Install and configure MongoDB
-* [ ] Install backend and frontend packages
-* [ ] Run backend and frontend servers
-* [ ] Use forms to manage students, courses, teachers, enrollments
-* [ ] Extend schemas and UI as needed
+```bash
+cd ../frontend
+npm install
+```
+
+#### 🌐 Configure Frontend Environment
+
+Create a `.env.local` file in `/frontend`:
+
+```env
+NEXT_PUBLIC_API_BASE=http://localhost:5000
+```
+
+> Change this to your deployed API URL in production.
+
+#### ▶️ Run the Frontend
+
+```bash
+npm run dev
+```
+
+Visit your app at: [http://localhost:3000](http://localhost:3000)
 
 ---
+
+## 🔑 Admin Login
+
+Use the credentials created in the backend setup (from `createAdmin.js`).
+After login, you'll gain access to:
+
+* 📊 Dashboard overview
+* 🧾 Student & fee data
+* 🎓 Course and teacher management
+* 📤 Data export and filters
+
+---
+
+## 🧠 Core Functionalities
+
+### ✅ Dashboard
+
+* Total Students
+* Pending vs Paid Fees
+* New Admissions (last 30 days)
+* Course-wise charts and graphs
+
+### 📤 Data Export & Filters
+
+* Export filtered student records as CSV
+* Filter by course, admission date, or fee status
+* Auto-updates every 30 seconds
+
+### 📋 CRUD Modules
+
+* Add/Edit/Delete Students, Courses, Teachers
+* Realtime data reflection on dashboard
+
+---
+
+## 📌 Best Practices
+
+* ❗ **Do not commit `.env` files**
+* 🔑 Use long, random `JWT_SECRET` values in production
+* 🔒 Deploy via HTTPS with secure cookie handling
+* ⚠️ Change admin credentials before first use
+
+---
+
+## 🚧 Roadmap
+
+* ✅ Attendance module
+* ✅ SMS/Email notification integration
+* 🔐 Role-based Teacher Dashboard
+* 💵 Razorpay or Stripe integration
+* 📜 Printable certificates and receipts
+* 📲 Mobile app integration / PWA support
+
+---
+
+## 👨‍💻 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-name`)
+3. Commit your changes (`git commit -am 'Add feature'`)
+4. Push to the branch (`git push origin feature-name`)
+5. Open a Pull Request
+
+---
+
+## 👨‍🎓 Author
+
+Developed by [@amphitter](https://github.com/amphitter) — feel free to connect or raise issues.
+
+---
+
+## 📄 License
+
+Licensed under the [MIT License](LICENSE).
+
+---
+
+## 🙋 Need Help?
+
+Open an [issue](https://github.com/amphitter/Database-Management-System-CURD/issues) or reach out on GitHub Discussions.
+
+```
