@@ -209,5 +209,3 @@ Licensed under the [MIT License](LICENSE).
 ## 🙋 Need Help?
 
 Open an [issue](https://github.com/amphitter/Database-Management-System-CURD/issues) or reach out on GitHub Discussions.
-
-```
