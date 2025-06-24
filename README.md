@@ -14,28 +14,6 @@ A modern full-stack web application to manage student records, fee tracking, and
 - 📥 **CSV export** for filtered student records
 - 🔄 **Auto-refresh** dashboard every 30 seconds
 
----
-
-## 📂 Project Structure
-
-```
-
-Database-Management-System-CURD/
-├── backend/              # Express.js REST API
-│   ├── controllers/      # Route logic
-│   ├── models/           # Mongoose schemas
-│   ├── routes/           # API endpoints
-│   ├── createAdmin.js    # CLI script to create an admin
-│   ├── server.js         # Backend entry point
-│   └── .env              # Your environment configuration
-├── frontend/             # Next.js 14 (App Router)
-│   ├── components/       # Reusable UI components
-│   ├── app/              # App Router pages and layouts
-│   ├── utils/            # Axios services, helpers
-│   └── public/           # Static assets
-└── README.md             # This file
-
-````
 
 ---
 
